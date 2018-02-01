@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>Test Page</title>
-</head>
-<body>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+           $('#dbTable').load("db-table.html");
+        });
+    </script>
 
-<p>This is a paragraph.</p>
+    <title>Test Page</title>
+  </head>
 
-</body>
+  <body id="body">
+
+    <p id="para">This is a paragraph.</p>
+    <div id="dbTable"> </div>
+
+  </body>
 </html>
