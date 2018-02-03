@@ -2,14 +2,15 @@
   "name": "lottery-scratcher-odds",
   "version": "1.0.0",
   "description": "application to aggregate lottery scratcher odds",
-  "main": "app.js",
+  "main": "app/app.js",
   "scripts": {
-    "start": "nodemon -e css,js,html .",
+    "start": "nodemon -e css,js,ejs --watch app",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Put Your Money on It",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mysql": "^2.15.0",
     "reload": "^2.2.2"
