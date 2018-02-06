@@ -4,7 +4,7 @@ var app = express();
 
 app.set('port', 8080 );
 app.set('view engine', 'ejs');
-app.set('views', 'app/views');
+app.set('views', 'views');
 
 app.locals.siteTitle = 'CA Lottery Scratcher Odds';
 
