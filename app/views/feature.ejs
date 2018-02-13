@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/template/head.ejs %>
+</head>
+<body>
+  <% include partials/template/header.ejs %>
+  <div class="container">
+    <h1>Scratchers Feature</h1>
+
+    <p>Enter a prize amount you want to win, and we'll show you the games that have the best odds of winning!</p>
+
+    <form action="/update-feature" method="get" id="prizeForm">
+      PRIZE AMOUNT: <input type="number" name="prizeAmt" min="1" max="10000000">
+    </form><br>
+    
+    <button type="submit" form="prizeForm" value="Submit" class="btn btn-default">Submit</button>
+
+    <table class="table table-hover">
+        <%- tableData %>
+    </table>
+  </div> 
+</body>
+</html>
