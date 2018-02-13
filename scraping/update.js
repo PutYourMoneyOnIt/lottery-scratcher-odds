@@ -22,6 +22,7 @@ function executeQuery(sql, cb) {
 }
 
 var game = odds.game; //isolating the game json object
+var gameOdds = odds.gameodds; //isolating the gameodds json object
 //looping through games to obtain all the information
 for (gaN in game){
     var t = game[gaN];
@@ -38,5 +39,21 @@ for (gaN in game){
     + "ON DUPLICATE KEY UPDATE PrizeClaimed="+pc+", PrizeAvailable="+pa, function(result){
     })
 }
+for(gaO in gameOdds){
+    var t = gameOdds[gaO];
+    gn = t.GameNumber;
+    pr = t.price;
+    od = t.odds;
+    tw = t.TotalWinners;
+    pc = t.PrizeClaimed;
+    pa = t.PrizeAvailable;
+    name = t.Name;
+
+    executeQuery(`INSERT INTO gameoods(GameNumber, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable, Name) `
+    + `VALUE(${gn}, ${pr}, ${od}, ${tw}, ${pc}, ${pa}, ${name})`
+    + `ON DUPLICATE KEY UPDATE PrizeClaimed=${pc}, PrizeAvailable=${pa}`, function(result){
+    })
+}
+
 
 process.exit();//exit script
