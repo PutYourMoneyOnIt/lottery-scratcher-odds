@@ -39,4 +39,4 @@ for (gaN in game){
     })
 }
 
-exit();//exit script
+process.exit();//exit script
