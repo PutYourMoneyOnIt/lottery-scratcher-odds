@@ -62,7 +62,7 @@ def main():
         })
     #write data file to json file
     for x in range(len(gameOdds)):
-        scrapeGame(gameOdds[0], data)
+        scrapeGame(gameOdds[x], data)
     with open('odds.json', 'w') as outfile:  
         json.dump(data, outfile, indent=4)
 

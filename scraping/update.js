@@ -43,7 +43,7 @@ for(gaO in gameOdds){
     var t = gameOdds[gaO];
     gn = t.GameNumber;
     pr = t.price;
-    od = t.odds;
+    od = t.Odd;
     tw = t.TotalWinners;
     pc = t.PrizeClaimed;
     pa = t.PrizeAvailable;
