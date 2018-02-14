@@ -49,8 +49,8 @@ for(gaO in gameOdds){
     pa = t.PrizeAvailable;
     name = t.Name;
 
-    executeQuery(`INSERT INTO gameoods(GameNumber, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable, Name) `
-    + `VALUE(${gn}, ${pr}, ${od}, ${tw}, ${pc}, ${pa}, ${name})`
+    executeQuery(`INSERT INTO gameoods (GameNumber, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable, Name) `
+    + `VALUES (${gn}, ${pr}, ${od}, ${tw}, ${pc}, ${pa}, ${name}) `
     + `ON DUPLICATE KEY UPDATE PrizeClaimed=${pc}, PrizeAvailable=${pa}`, function(result){
     })
 }
