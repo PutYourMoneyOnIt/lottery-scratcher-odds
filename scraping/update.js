@@ -56,4 +56,4 @@ for(gaO in gameOdds){
 }
 
 
-process.exit();//exit script
+//process.exit();//exit script
