@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var dateFormat = require('dateformat');
 
 var db = mysql.createConnection({
   host: 'localhost',
@@ -42,7 +43,7 @@ router.get('/feature', (req, res) => {
                 tableData: output,
                 lastUpdate: lastUpdate
             });
-            lastUpdate = 'Last update: ' + result[0].lastUpdate;
+            lastUpdate = 'Last update: ' + dateFormat(result[0].lastUpdate, "ddd mmm dd yyyy");
         });
 });
 

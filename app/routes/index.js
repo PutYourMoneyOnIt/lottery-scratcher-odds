@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var dateFormat = require('dateformat');
 
 var db = mysql.createConnection({
   host: 'localhost',
@@ -11,7 +12,7 @@ var db = mysql.createConnection({
 
 db.connect(function(err) {
     if (err) throw err;
-console.log("Connected to Database!");
+    console.log("Connected to Database!");
 });
 
 // Executes queries on declared db (it can be extended if you want to use more than one db)
@@ -54,7 +55,7 @@ executeQuery("SELECT " + columns + " FROM " + table +
 executeQuery("SELECT lastUpdate FROM " + table + 
     " LIMIT 1",
     function(result) {
-        lastUpdate = result[0].lastUpdate;
+        lastUpdate = dateFormat(result[0].lastUpdate, "ddd mmm dd yyyy");
     });
 
 router.get('/', (req, res) => {
