@@ -24,6 +24,7 @@ function executeQuery(sql, cb) {
 
 var table = 'game';
 var output = '';
+var lastUpdate = '';
 var orderBy = 'TicketPrice';
 var columns = 'GameNumber, TicketPrice, Name, TopPrize, TotalWinners, PrizeClaimed, PrizeAvailable';
 
@@ -50,11 +51,18 @@ executeQuery("SELECT " + columns + " FROM " + table +
         output += '</table>\n';
 });
 
+executeQuery("SELECT lastUpdate FROM " + table + 
+    " LIMIT 1",
+    function(result) {
+        lastUpdate = result[0].lastUpdate;
+    });
+
 router.get('/', (req, res) => {
     res.render('index', {
         pageTitle: 'Home',
         pageID: 'home',
-        tableData: output
+        tableData: output,
+        lastUpdate: 'Last update: ' + lastUpdate
     });
 });
 

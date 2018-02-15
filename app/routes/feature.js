@@ -36,7 +36,7 @@ router.get('/feature', (req, res) => {
         " WHERE " + match + " = " + inputMatch + 
         " LIMIT 1",
         function(result) {
-            lastUpdate = result[0].name;
+            lastUpdate = result[0].lastUpdate;
             res.render('feature', {
                 pageTitle: 'Feature',
                 pageID: 'feature',
@@ -81,7 +81,7 @@ router.get('/update-feature', (req, res) => {
                 pageTitle: 'Feature',
                 pageID: 'feature',
                 tableData: output,
-                lastUpdate: 'Last update: ' + lastupdate
+                lastUpdate: 'Last update: ' + lastUpdate
             });
         });
 });
