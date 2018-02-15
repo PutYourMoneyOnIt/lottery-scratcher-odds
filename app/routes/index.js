@@ -24,8 +24,9 @@ function executeQuery(sql, cb) {
 
 var table = 'game';
 var output = '';
+var orderBy = 'TicketPrice';
 
-executeQuery("SELECT * FROM " + table, function(result) {
+executeQuery("SELECT * FROM " + table + " ORDER BY " + orderBy + " ASC", function(result) {
     output += '<table class="table table-hover">\n';
     output += '<thead>\n';
     output += '<tr>\n';
