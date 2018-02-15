@@ -29,13 +29,21 @@ var match = 'price';
 var inputMatch = 10; // TBD, default for now $10 prize
 var orderBy = 'Odd';
 var limit = 10;
+var lastUpdate = ''
 
 router.get('/feature', (req, res) => {
-    res.render('feature', {
-        pageTitle: 'Feature',
-        pageID: 'feature',
-        tableData: output
-    });
+    executeQuery("SELECT lastUpdate FROM " + table + 
+        " WHERE " + match + " = " + inputMatch + 
+        " LIMIT 1",
+        function(result) {
+            lastUpdate = result[0].name;
+            res.render('feature', {
+                pageTitle: 'Feature',
+                pageID: 'feature',
+                tableData: output,
+                lastUpdate: ''
+            });
+        });
 });
 
 router.get('/update-feature', (req, res) => {
@@ -72,7 +80,8 @@ router.get('/update-feature', (req, res) => {
             res.render('feature', {
                 pageTitle: 'Feature',
                 pageID: 'feature',
-                tableData: output
+                tableData: output,
+                lastUpdate: 'Last update: ' + lastupdate
             });
         });
 });
