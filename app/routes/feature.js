@@ -23,6 +23,7 @@ function executeQuery(sql, cb) {
 }
 
 var output = '';
+var columns = 'GameNumber, Name, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable';
 var table = 'gameodds';
 var match = 'price';
 var inputMatch = 10; // TBD, default for now $10 prize
@@ -44,8 +45,10 @@ router.get('/update-feature', (req, res) => {
         inputMatch = 10; // default value?
     } 
 
-    executeQuery("SELECT * FROM " + table + " WHERE " + match + " = " + inputMatch + " ORDER BY " + orderBy + " ASC" + 
-            " LIMIT " + limit,
+    executeQuery("SELECT " + columns + " FROM " + table + 
+        " WHERE " + match + " = " + inputMatch + 
+        " ORDER BY " + orderBy + " ASC" + 
+        " LIMIT " + limit,
         function(result) {
             output += '<table class="table table-hover">\n';
             output += '<thead>\n';

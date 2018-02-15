@@ -25,26 +25,29 @@ function executeQuery(sql, cb) {
 var table = 'game';
 var output = '';
 var orderBy = 'TicketPrice';
+var columns = 'GameNumber, TicketPrice, Name, TopPrize, TotalWinners, PrizeClaimed, PrizeAvailable';
 
-executeQuery("SELECT * FROM " + table + " ORDER BY " + orderBy + " ASC", function(result) {
-    output += '<table class="table table-hover">\n';
-    output += '<thead>\n';
-    output += '<tr>\n';
-    for(var column in result[0]) {
-        output += '<th scope="col">' + column + '</td>\n';
-    }
-    output += '</tr>\n';
-    output += '</thead>';
-    output += '<tbody>\n';
-    for(var row in result) {
-        output += '<tr class="table-light">\n';
-        for(var column in result[row]) {
-        output += '<td>' + result[row][column] + '</td>\n';
+executeQuery("SELECT " + columns + " FROM " + table + 
+    " ORDER BY " + orderBy + " ASC", 
+    function(result) {
+        output += '<table class="table table-hover">\n';
+        output += '<thead>\n';
+        output += '<tr>\n';
+        for(var column in result[0]) {
+            output += '<th scope="col">' + column + '</td>\n';
         }
         output += '</tr>\n';
-    }
-    output += '</tbody>\n';
-    output += '</table>\n';
+        output += '</thead>';
+        output += '<tbody>\n';
+        for(var row in result) {
+            output += '<tr class="table-light">\n';
+            for(var column in result[row]) {
+            output += '<td>' + result[row][column] + '</td>\n';
+            }
+            output += '</tr>\n';
+        }
+        output += '</tbody>\n';
+        output += '</table>\n';
 });
 
 router.get('/', (req, res) => {
