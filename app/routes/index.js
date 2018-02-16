@@ -3,17 +3,7 @@ var router = express.Router();
 var mysql = require('mysql');
 var dateFormat = require('dateformat');
 
-var db = mysql.createConnection({
-  host: 'localhost',
-  user: 'appuser',
-  password: 'C$575app',
-  database: 'scracherdev'
-});
-
-db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected to Database!");
-});
+const db = require('../db');
 
 // Executes queries on declared db (it can be extended if you want to use more than one db)
 function executeQuery(sql, cb) {
