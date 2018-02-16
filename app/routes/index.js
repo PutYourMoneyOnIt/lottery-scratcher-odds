@@ -26,7 +26,6 @@ function executeQuery(sql, cb) {
 var table = 'game';
 var output = '';
 var lastUpdate = '';
-var columns = 'GameNumber, TicketPrice, Name, TopPrize, TotalWinners, PrizeClaimed, PrizeAvailable';
 
 executeQuery("SELECT lastUpdate FROM " + table + 
     " LIMIT 1",
@@ -35,6 +34,7 @@ executeQuery("SELECT lastUpdate FROM " + table +
     });
 
 router.get('/', (req, res) => {
+    columns = 'GameNumber, TicketPrice, Name, TopPrize, TotalWinners, PrizeClaimed, PrizeAvailable';
     table = 'game';
     orderBy = 'TicketPrice';
 
@@ -81,9 +81,10 @@ router.get('/', (req, res) => {
 
 router.get('/game', (req, res) => {
     output = '';
+    columns = 'GameNumber, Name, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable';
     table = 'gameodds';
     inputMatch = req.query.gameName;
-    orderBy = 'price'
+    orderBy = 'price';
 
     executeQuery("SELECT " + columns + " FROM " + table + 
         " WHERE Name = '"+ inputMatch + "'" +
