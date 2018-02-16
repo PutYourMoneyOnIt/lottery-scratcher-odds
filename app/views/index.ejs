@@ -7,7 +7,10 @@
   <% include partials/template/header.ejs %>
   <div class="container">
     <h1>Scratchers</h1>
-    <p class="align-right"><%- lastUpdate %></p>
+    <form action="/" method="get">
+    	<%- backButton %>
+    	<p class="align-right"><%- lastUpdate %></p>
+    </form><br>
     <table class="table table-hover">
         <%- tableData %>
     </table>

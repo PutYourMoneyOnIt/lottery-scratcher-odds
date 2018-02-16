@@ -26,31 +26,7 @@ function executeQuery(sql, cb) {
 var table = 'game';
 var output = '';
 var lastUpdate = '';
-var orderBy = 'TicketPrice';
 var columns = 'GameNumber, TicketPrice, Name, TopPrize, TotalWinners, PrizeClaimed, PrizeAvailable';
-
-executeQuery("SELECT " + columns + " FROM " + table + 
-    " ORDER BY " + orderBy + " ASC", 
-    function(result) {
-        output += '<table class="table table-hover">\n';
-        output += '<thead>\n';
-        output += '<tr>\n';
-        for(var column in result[0]) {
-            output += '<th scope="col">' + column + '</td>\n';
-        }
-        output += '</tr>\n';
-        output += '</thead>';
-        output += '<tbody>\n';
-        for(var row in result) {
-            output += '<tr class="table-light">\n';
-            for(var column in result[row]) {
-            output += '<td>' + result[row][column] + '</td>\n';
-            }
-            output += '</tr>\n';
-        }
-        output += '</tbody>\n';
-        output += '</table>\n';
-});
 
 executeQuery("SELECT lastUpdate FROM " + table + 
     " LIMIT 1",
@@ -59,11 +35,87 @@ executeQuery("SELECT lastUpdate FROM " + table +
     });
 
 router.get('/', (req, res) => {
-    res.render('index', {
-        pageTitle: 'Home',
-        pageID: 'home',
-        tableData: output,
-        lastUpdate: 'Last update: ' + lastUpdate
+    table = 'game';
+    orderBy = 'TicketPrice';
+
+    executeQuery("SELECT " + columns + " FROM " + table + 
+        " ORDER BY " + orderBy + " ASC", 
+        function(result) {
+            output = '';
+            output += '<form method="get" action="/game">\n';
+            output += '<table class="table table-hover">\n';
+            output += '<thead>\n';
+            output += '<tr>\n';
+            for(var column in result[0]) {
+                output += '<th scope="col">' + column + '</td>\n';
+            }
+            output += '</tr>\n';
+            output += '</thead>';
+            output += '<tbody>\n';
+            for(var row in result) {
+                output += '<tr class="table-light">\n';
+                for(var column in result[row]) {
+                    if (result[row]['Name'] == result[row][column]) {
+                        output += '<td><input type="submit" class="btn btn-default gameName" value="' + 
+                                    result[row][column] + '" name="gameName"></td>\n'; 
+                    }
+                    else {
+                        output += '<td>' + result[row][column] + '</td>\n'; 
+                    }
+                }
+                output += '</tr>\n';
+            }
+            output += '</tbody>\n';
+            output += '</table>\n';
+            output += '</form>\n';
+
+            res.render('index', {
+                pageTitle: 'Home',
+                pageID: 'home',
+                tableData: output,
+                lastUpdate: 'Last update: ' + lastUpdate,
+                backButton: ''
+            });
+    });
+});
+
+router.get('/game', (req, res) => {
+    output = '';
+    table = 'gameodds';
+    inputMatch = req.query.gameName;
+    orderBy = 'price'
+
+    executeQuery("SELECT " + columns + " FROM " + table + 
+        " WHERE Name = '"+ inputMatch + "'" +
+        " ORDER BY " + orderBy + " DESC", 
+        function(result) {
+            output += '<table class="table table-hover">\n';
+            output += '<thead>\n';
+            output += '<tr>\n';
+            for(var column in result[0]) {
+                output += '<th scope="col">' + column + '</td>\n';
+            }
+            output += '</tr>\n';
+            output += '</thead>';
+            output += '<tbody>\n';
+            for(var row in result) {
+                output += '<tr class="table-light">\n';
+                for(var column in result[row]) {
+                    output += '<td>' + result[row][column] + '</td>\n';
+                }
+                output += '</tr>\n';
+            }
+            output += '</tbody>\n';
+            output += '</table>\n';
+
+            res.render('index', {
+                pageTitle: 'Home',
+                pageID: 'home',
+                tableData: output,
+                lastUpdate: 'Last update: ' + lastUpdate,
+                backButton: '<button type="submit" value="Submit" class="btn btn-default">' +
+                                '&lt;&lt; Back</button>'
+            });
     });
 });
 

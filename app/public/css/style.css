@@ -5,3 +5,9 @@ header {
 .align-right {
 	float: right;
 }
+
+.gameName {
+	background-color: transparent;
+	padding: 0px;
+	color: #008cba;
+}

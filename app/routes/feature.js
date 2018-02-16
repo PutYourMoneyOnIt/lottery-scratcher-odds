@@ -71,7 +71,7 @@ router.get('/update-feature', (req, res) => {
             for(var row in result) {
                 output += '<tr class="table-light">\n';
                 for(var column in result[row]) {
-                output += '<td>' + result[row][column] + '</td>\n';
+                    output += '<td>' + result[row][column] + '</td>\n';
                 }
                 output += '</tr>\n';
             }
