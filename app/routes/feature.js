@@ -22,7 +22,7 @@ var orderBy = 'Odd';
 var limit = 10;
 var lastUpdate = ''
 
-router.get('/feature', (req, res) => {
+router.get('/best-bet', (req, res) => {
     executeQuery("SELECT lastUpdate FROM " + table + 
         " WHERE " + match + " = " + inputMatch + 
         " LIMIT 1",
@@ -37,7 +37,7 @@ router.get('/feature', (req, res) => {
         });
 });
 
-router.get('/update-feature', (req, res) => {
+router.get('/update-best-bet', (req, res) => {
     output = '';
     inputMatch = req.query.prizeAmt;
     if (inputMatch === undefined || inputMatch == '') {

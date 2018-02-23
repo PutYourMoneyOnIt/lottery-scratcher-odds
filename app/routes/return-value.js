@@ -21,7 +21,7 @@ executeQuery("call GameReturnValue;",
         lastUpdate = dateFormat(result[0].lastUpdate, "ddd mmm dd yyyy");
     });
 
-router.get('/return-value', (req, res) => {
+router.get('/biggest-bang', (req, res) => {
     executeQuery("call GameReturnValue;", 
         function(result) {
             result = result[0];

@@ -10,6 +10,11 @@ header {
     float: left;
 }
 
+.submit-btn {
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
 .gameName {
     background-color: transparent;
     padding: 0px;
