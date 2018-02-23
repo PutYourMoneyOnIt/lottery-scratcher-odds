@@ -1,17 +1,19 @@
 var odds = require('./odds.json');//loads json data into odds
 var mysql = require('mysql');
 
-var db = mysql.createConnection({
-    host: 'localhost',
-    user: 'appuser',
-    password: 'C$575app',
-    database: 'scracherdev'
-});
+const db = require('../app/db');
 
-db.connect(function(err){
-    if(err) throw err;
-    console.log("Connected to Database!");
-});
+// var db = mysql.createConnection({
+//     host: 'localhost',
+//     user: 'appuser',
+//     password: 'C$575app',
+//     database: 'scracherdev'
+// });
+
+// db.connect(function(err){
+//     if(err) throw err;
+//     console.log("Connected to Database!");
+// });
 
 // Executes queries on declared db (it can be extended if you want to use more than one db)
 function executeQuery(sql, cb) {

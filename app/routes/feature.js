@@ -1,18 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var dateFormat = require('dateformat');
 
-var db = mysql.createConnection({
-  host: 'localhost',
-  user: 'appuser',
-  password: 'C$575app',
-  database: 'scracherdev'
-});
-
-db.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected to Database!");
-});
+const db = require('../db');
 
 // Executes queries on declared db (it can be extended if you want to use more than one db)
 function executeQuery(sql, cb) {
@@ -23,18 +14,27 @@ function executeQuery(sql, cb) {
 }
 
 var output = '';
+var columns = 'GameNumber, Name, prize, Odd, TotalWinners, PrizeClaimed, PrizeAvailable';
 var table = 'gameodds';
-var match = 'price';
+var match = 'prize';
 var inputMatch = 10; // TBD, default for now $10 prize
 var orderBy = 'Odd';
 var limit = 10;
+var lastUpdate = ''
 
 router.get('/feature', (req, res) => {
-    res.render('feature', {
-        pageTitle: 'Feature',
-        pageID: 'feature',
-        tableData: output
-    });
+    executeQuery("SELECT lastUpdate FROM " + table + 
+        " WHERE " + match + " = " + inputMatch + 
+        " LIMIT 1",
+        function(result) {
+            res.render('feature', {
+                pageTitle: 'Feature',
+                pageID: 'feature',
+                tableData: output,
+                lastUpdate: lastUpdate
+            });
+            lastUpdate = 'Last update: ' + dateFormat(result[0].lastUpdate, "ddd mmm dd yyyy");
+        });
 });
 
 router.get('/update-feature', (req, res) => {
@@ -44,8 +44,10 @@ router.get('/update-feature', (req, res) => {
         inputMatch = 10; // default value?
     } 
 
-    executeQuery("SELECT * FROM " + table + " WHERE " + match + " = " + inputMatch + " ORDER BY " + orderBy + " ASC" + 
-            " LIMIT " + limit,
+    executeQuery("SELECT " + columns + " FROM " + table + 
+        " WHERE " + match + " = " + inputMatch + 
+        " ORDER BY " + orderBy + " ASC" + 
+        " LIMIT " + limit,
         function(result) {
             output += '<table class="table table-hover">\n';
             output += '<thead>\n';
@@ -59,7 +61,7 @@ router.get('/update-feature', (req, res) => {
             for(var row in result) {
                 output += '<tr class="table-light">\n';
                 for(var column in result[row]) {
-                output += '<td>' + result[row][column] + '</td>\n';
+                    output += '<td>' + result[row][column] + '</td>\n';
                 }
                 output += '</tr>\n';
             }
@@ -69,7 +71,8 @@ router.get('/update-feature', (req, res) => {
             res.render('feature', {
                 pageTitle: 'Feature',
                 pageID: 'feature',
-                tableData: output
+                tableData: output,
+                lastUpdate: lastUpdate
             });
         });
 });

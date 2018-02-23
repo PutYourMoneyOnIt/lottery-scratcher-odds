@@ -1,0 +1,7 @@
+{
+    "host": "localhost",
+    "user": "appuser",
+    "password": "C$575app",
+    "database": "scracherdev",
+    "port": "3306"
+}

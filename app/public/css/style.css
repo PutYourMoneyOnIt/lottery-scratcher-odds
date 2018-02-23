@@ -1,3 +1,13 @@
 header {
     margin-bottom: 2rem;
 }
+
+.align-right {
+    float: right;
+}
+
+.gameName {
+    background-color: transparent;
+    padding: 0px;
+    color: #008cba;
+}
