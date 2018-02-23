@@ -21,44 +21,47 @@ function executeQuery(sql, cb) {
     });
 }
 
-var game = odds.game; //isolating the game json object
-var gameOdds = odds.gameodds; //isolating the gameodds json object
-//looping through games to obtain all the information
-for (gaN in game){
-    var t = game[gaN];
-    gn = t.GameNumber;
-    tp = t.TicketPrice;
-    name = t.Name;
-    top = t.TopPrize;
-    tw = t.TotalWinners;
-    pc = t.PrizeClaimed;
-    pa = t.PrizeAvailable;
-    //query to insert game into table, if game exist it will update prizes claimed and prize available
-    executeQuery("INSERT INTO game (GameNumber, TicketPrice, Name, TopPrize, TotalWinners, PrizeClaimed, PrizeAvailable) "
-    + "VALUES ("+gn+", "+tp+", \'"+name+"\', "+top+", "+tw+", "+pc+", "+pa+")"
-    + "ON DUPLICATE KEY UPDATE PrizeClaimed="+pc+", PrizeAvailable="+pa, function(result){
-    })
+async function updatedb(){
+    var game = odds.game; //isolating the game json object
+    var gameOdds = odds.gameodds; //isolating the gameodds json object
+    //looping through games to obtain all the information
+    for (gaN in game){
+        var t = game[gaN];
+        gn = t.GameNumber;
+        tp = t.TicketPrice;
+        name = t.Name;
+        top = t.TopPrize;
+        tw = t.TotalWinners;
+        pc = t.PrizeClaimed;
+        pa = t.PrizeAvailable;
+        //query to insert game into table, if game exist it will update prizes claimed and prize available
+        executeQuery("INSERT INTO game (GameNumber, TicketPrice, Name, TopPrize, TotalWinners, PrizeClaimed, PrizeAvailable) "
+        + "VALUES ("+gn+", "+tp+", \'"+name+"\', "+top+", "+tw+", "+pc+", "+pa+")"
+        + "ON DUPLICATE KEY UPDATE PrizeClaimed="+pc+", PrizeAvailable="+pa, function(result){
+        })
+    }
+    await executeQuery("TRUNCATE TABLE gameOdds");
+    for(gaO in gameOdds){
+        var t = gameOdds[gaO];
+        gn = t.GameNumber;
+        pr = t.price;
+        od = t.Odd;
+        tw = t.TotalWinners;
+        pc = t.PrizeClaimed;
+        pa = t.PrizeAvailable;
+        name = t.Name;
+
+
+        executeQuery("INSERT INTO gameodds (GameNumber, prize, Odd, TotalWinners, PrizeClaimed, PrizeAvailable, Name, lastUpdate) "
+        + "VALUES ("+gn+", "+pr+", "+od+", "+tw+", "+pc+", "+pa+", \'"+name+"\', now()) " 
+        + "ON DUPLICATE KEY UPDATE PrizeClaimed="+pc+", PrizeAvailable="+pa, function(result){
+        })
+
+        // executeQuery(`INSERT INTO gameodds (GameNumber, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable, Name) `
+        // + `VALUES (${parseInt(gn)}, "${pr}", ${parseInt(od)}, ${parseInt(tw)}, ${parseInt(pc)}, ${parseInt(pa)}, "${name}") `
+        // + `ON DUPLICATE KEY UPDATE PrizeClaimed=${parseInt(pc)}, PrizeAvailable=${parseInt(pa)}`, function(result){
+        // })
+    }
 }
-for(gaO in gameOdds){
-    var t = gameOdds[gaO];
-    gn = t.GameNumber;
-    pr = t.price;
-    od = t.Odd;
-    tw = t.TotalWinners;
-    pc = t.PrizeClaimed;
-    pa = t.PrizeAvailable;
-    name = t.Name;
-
-    executeQuery("INSERT INTO gameodds (GameNumber, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable, Name) "
-    + "VALUES ("+gn+", \'"+pr+"\', "+od+", "+tw+", "+pc+", "+pa+", \'"+name+"\') " 
-    + "ON DUPLICATE KEY UPDATE PrizeClaimed="+pc+", PrizeAvailable="+pa, function(result){
-    })
-
-    // executeQuery(`INSERT INTO gameodds (GameNumber, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable, Name) `
-    // + `VALUES (${parseInt(gn)}, "${pr}", ${parseInt(od)}, ${parseInt(tw)}, ${parseInt(pc)}, ${parseInt(pa)}, "${name}") `
-    // + `ON DUPLICATE KEY UPDATE PrizeClaimed=${parseInt(pc)}, PrizeAvailable=${parseInt(pa)}`, function(result){
-    // })
-}
-
-
-//process.exit();//exit script
+updatedb();
+process.exit();//exit script

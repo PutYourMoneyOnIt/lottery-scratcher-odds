@@ -83,6 +83,8 @@ def scrapeGame(gameOdds, data):
             telem = telem.strip('$') #removing $ to match our database holding numbers
             telem = telem.replace(',', '') #removing ',' as we want plain numbers
             game.append(telem)
+        if(game[0] == "Ticket"):
+            game[0] = "-1"
         data['gameodds'].append({
             'GameNumber' : gameOdds[0],
             'price' : game[0],
