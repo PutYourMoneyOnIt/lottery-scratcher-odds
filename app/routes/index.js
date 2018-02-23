@@ -92,6 +92,10 @@ router.get('/game', (req, res) => {
             for(var row in result) {
                 output += '<tr class="table-light">\n';
                 for(var column in result[row]) {
+                    // replace placeholder -1 with Ticket prize
+                    if (column === 'prize' && result[row][column] == -1) {
+                        result[row][column] = 'Ticket';
+                    }
                     output += '<td>' + result[row][column] + '</td>\n';
                 }
                 output += '</tr>\n';
