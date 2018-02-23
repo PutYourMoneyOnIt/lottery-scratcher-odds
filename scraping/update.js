@@ -66,4 +66,4 @@ async function updatedb(){
     }
 }
 updatedb();
-process.exit();//exit script
+//process.exit();//exit script
