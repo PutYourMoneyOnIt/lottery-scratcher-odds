@@ -1,4 +1,4 @@
-var odds = require('./odds.json');//loads json data into odds
+var odds = require('/tmp/odds.json');//loads json data into odds
 var mysql = require('mysql');
 
 const db = require('../app/db');
