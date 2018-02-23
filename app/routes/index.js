@@ -71,10 +71,10 @@ router.get('/', (req, res) => {
 
 router.get('/game', (req, res) => {
     output = '';
-    columns = 'GameNumber, Name, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable';
+    columns = 'GameNumber, Name, prize, Odd, TotalWinners, PrizeClaimed, PrizeAvailable';
     table = 'gameodds';
     inputMatch = req.query.gameName;
-    orderBy = 'price';
+    orderBy = 'prize';
 
     executeQuery("SELECT " + columns + " FROM " + table + 
         " WHERE Name = '"+ inputMatch + "'" +

@@ -3,11 +3,11 @@ header {
 }
 
 .align-right {
-	float: right;
+    float: right;
 }
 
 .gameName {
-	background-color: transparent;
-	padding: 0px;
-	color: #008cba;
+    background-color: transparent;
+    padding: 0px;
+    color: #008cba;
 }

@@ -14,9 +14,9 @@ function executeQuery(sql, cb) {
 }
 
 var output = '';
-var columns = 'GameNumber, Name, price, Odd, TotalWinners, PrizeClaimed, PrizeAvailable';
+var columns = 'GameNumber, Name, prize, Odd, TotalWinners, PrizeClaimed, PrizeAvailable';
 var table = 'gameodds';
-var match = 'price';
+var match = 'prize';
 var inputMatch = 10; // TBD, default for now $10 prize
 var orderBy = 'Odd';
 var limit = 10;
