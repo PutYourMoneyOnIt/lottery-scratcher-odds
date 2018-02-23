@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include partials/template/head.ejs %>
+</head>
+<body>
+  <% include partials/template/header.ejs %>
+  <div class="container">
+    <h1>Scratchers Return Value</h1>
+
+    <div>
+      <p class="align-left">Check out which games have the highest average return value!</p>
+      <p class="align-right"><%- lastUpdate %></p>
+    </div>
+
+    <table class="table table-hover">
+        <%- tableData %>
+    </table>
+  </div> 
+</body>
+</html>

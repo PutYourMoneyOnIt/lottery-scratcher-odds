@@ -6,6 +6,10 @@ header {
     float: right;
 }
 
+.align-left {
+    float: left;
+}
+
 .gameName {
     background-color: transparent;
     padding: 0px;

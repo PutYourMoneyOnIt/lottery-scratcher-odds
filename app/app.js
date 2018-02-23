@@ -11,6 +11,7 @@ app.locals.siteTitle = 'CA Lottery Scratcher Odds';
 app.use(express.static('./public'));
 app.use(require('./routes/index'));
 app.use(require('./routes/feature'));
+app.use(require('./routes/return-value'));
 
 var server = app.listen(app.get('port'), () => {
   console.log('Listening on port ' + app.get('port'));
