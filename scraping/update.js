@@ -42,7 +42,7 @@ async function updatedb(){
         + "ON DUPLICATE KEY UPDATE PrizeClaimed="+pc+", PrizeAvailable="+pa, function(result){
         })
     }
-    await executeQuery("TRUNCATE TABLE gameOdds");
+    await executeQuery("TRUNCATE TABLE gameodds");
     for(gaO in gameOdds){
         var t = gameOdds[gaO];
         gn = t.GameNumber;
