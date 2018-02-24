@@ -27,6 +27,7 @@ router.get('/biggest-bang', (req, res) => {
             result = result[0];
             
             output = ''
+            output += '<form method="get" action="/game">\n';
             output += '<table class="table table-hover">\n';
             output += '<thead>\n';
             output += '<tr>\n';
@@ -39,12 +40,19 @@ router.get('/biggest-bang', (req, res) => {
             for(var row in result) {
                 output += '<tr class="table-light">\n';
                 for(var column in result[row]) {
-                    output += '<td>' + result[row][column] + '</td>\n';
+                    if (result[row]['Name'] == result[row][column]) {
+                        output += '<td><input type="submit" class="btn btn-default gameName" value="' + 
+                                    result[row][column] + '" name="gameName"></td>\n'; 
+                    }
+                    else {
+                        output += '<td>' + result[row][column] + '</td>\n'; 
+                    }
                 }
                 output += '</tr>\n';
             }
             output += '</tbody>\n';
             output += '</table>\n';
+            output += '</form>\n';
 
             res.render('return-value', {
                 pageTitle: 'Return Value',

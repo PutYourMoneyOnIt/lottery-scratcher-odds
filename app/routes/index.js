@@ -108,7 +108,7 @@ router.get('/game', (req, res) => {
                 pageID: 'home',
                 tableData: output,
                 lastUpdate: 'Last update: ' + lastUpdate,
-                backButton: '<button type="submit" value="Submit" class="btn btn-default">' +
+                backButton: '<button type="button" class="btn btn-default" onclick="history.back()">' +
                                 '&lt;&lt; Back</button>'
             });
     });
