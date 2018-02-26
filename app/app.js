@@ -4,11 +4,11 @@ var app = express();
 
 app.set('port', 8080 );
 app.set('view engine', 'ejs');
-app.set('views', 'views');
+app.set('views', 'app/views');
 
 app.locals.siteTitle = 'CA Lottery Scratcher Odds';
 
-app.use(express.static('./public'));
+app.use(express.static('app/public'));
 app.use(require('./routes/index'));
 app.use(require('./routes/feature'));
 app.use(require('./routes/return-value'));
