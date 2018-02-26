@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <% include partials/template/head.ejs %>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/css/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 <body>
   <% include partials/template/header.ejs %>
@@ -11,9 +12,19 @@
     	<%- backButton %>
     	<p class="align-right"><%- lastUpdate %></p>
     </form><br>
-    <table class="table table-hover">
-        <%- tableData %>
-    </table>
-  </div> 
+    <%- tableData %>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.12/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.13/js/dataTables.bootstrap4.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $('#allScratchers').DataTable({
+        "searching": false,
+        "paging": false,
+        "order": [1, 'asc']
+      });
+    });
+  </script>
 </body>
 </html>

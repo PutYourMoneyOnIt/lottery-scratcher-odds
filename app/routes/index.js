@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
         function(result) {
             output = '';
             output += '<form method="get" action="/game">\n';
-            output += '<table class="table table-hover">\n';
+            output += '<table id="allScratchers" class="table table-hover">\n';
             output += '<thead>\n';
             output += '<tr>\n';
             for(var column in result[0]) {
