@@ -37,9 +37,9 @@ async function updatedb(){
         pc = t.PrizeClaimed;
         pa = t.PrizeAvailable;
         //query to insert game into table, if game exist it will update prizes claimed and prize available
-        executeQuery("INSERT INTO game (GameNumber, TicketPrice, Name, TopPrize, TotalWinners, PrizeClaimed, PrizeAvailable) "
-        + "VALUES ("+gn+", "+tp+", \'"+name+"\', "+top+", "+tw+", "+pc+", "+pa+")"
-        + "ON DUPLICATE KEY UPDATE PrizeClaimed="+pc+", PrizeAvailable="+pa, function(result){
+        executeQuery("INSERT INTO game (GameNumber, TicketPrice, Name, TopPrize, TotalWinners, PrizeClaimed, PrizeAvailable, lastUpdate) "
+        + "VALUES ("+gn+", "+tp+", \'"+name+"\', "+top+", "+tw+", "+pc+", "+pa+", now())"
+        + "ON DUPLICATE KEY UPDATE lastUpdate = now(), PrizeClaimed="+pc+", PrizeAvailable="+pa, function(result){
         })
     }
     await db.query("TRUNCATE TABLE gameodds");
