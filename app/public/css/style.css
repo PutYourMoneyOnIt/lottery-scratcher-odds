@@ -20,3 +20,7 @@ header {
     padding: 0px;
     color: #008cba;
 }
+
+.dataTables_filter {
+    float: right
+}
