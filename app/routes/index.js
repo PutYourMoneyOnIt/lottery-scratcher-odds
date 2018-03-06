@@ -46,7 +46,7 @@ router.get('/', (req, res) => {
                 output += '<tr class="table-light">\n';
                 for(var column in result[row]) {
                     if (result[row]['Name'] == result[row][column]) {
-                        output += '<td><input type="submit" class="btn btn-default gameName" value="' + 
+                        output += '<td><p hidden>' + result[row][column] + '</p><input type="submit" class="btn btn-default gameName" value="' + 
                                     result[row][column] + '" name="gameName"></td>\n'; 
                     }
                     else {
